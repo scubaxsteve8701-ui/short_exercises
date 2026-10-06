@@ -1,0 +1,94 @@
+/* custom properties for the colors */
+:root {
+    --page-bg-color: yellow;
+    --body-bg-color: white;
+    --accent-color: blue;
+}
+
+/* reset selector */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* the html element */
+html {
+    background-color: var(--page-bg-color);
+}
+
+/* the body */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    width: 650px;
+    margin: 0 auto;
+    background-color: var(--body-bg-color);
+    border: 8px double var(--accent-color);
+}
+
+/* the main element */
+main {
+    padding: 1em 1.5em;
+}
+
+/* headings */
+h1 {
+    font-size: 150%;
+    color: var(--accent-color);
+    margin-bottom: .5em;
+}
+h2 {
+    font-size: 125%;
+    margin: .75em 0 .4em 0;
+}
+h3 {
+    font-size: 115%;
+    margin-bottom: .4em;
+}
+
+/* paragraphs, blockquote, and list */
+p {
+    margin-bottom: .5em;
+}
+blockquote {
+    padding: 0;
+}
+ul {
+    margin: 0 0 .5em 1.25em;
+}
+li {
+    padding-bottom: .25em;
+}
+
+/* the cite element and the paragraphs that contain it */
+cite {
+    color: var(--accent-color);
+    font-style: normal;
+    font-weight: bold;
+}
+.cite {
+    text-align: right;
+    margin-bottom: .75em;
+}
+
+/* the floated image */
+img {
+    float: left;
+    margin: 0 1em .5em 0;
+}
+h2 {
+    clear: left;
+}
+
+/* the footer */
+footer {
+    border-top: 2px solid var(--accent-color);
+    margin: 0 .5em;
+    padding: .75em 0;
+}
+footer p {
+    font-size: 90%;
+    font-weight: bold;
+    text-align: center;
+    margin: .25em 0;
+}
