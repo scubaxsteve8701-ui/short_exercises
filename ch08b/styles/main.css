@@ -191,18 +191,22 @@ footer {
 /* ========== media queries ========== */
 
 /* Tested in Chrome DevTools: the navigation menu items wrap
-   to a second line at 562px wide, so the horizontal menu
-   is used at 563px and up. */
-@media only screen and (min-width: 563px) {
+   when the page is narrower than about 575px wide, so the
+   horizontal menu is used at 576px and up. */
+@media only screen and (min-width: 576px) {
 	.menu-btn {
 		display: none;           /* hide the menu button */
 	}
 	.menu,
 	#menu-toggle:checked ~ .menu {   /* stays horizontal even if checked */
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: space-evenly;
 		position: static;
 		min-width: 0;
+	}
+	.menu > li > a {
+		white-space: nowrap;     /* keep each menu item on one line */
 	}
 	.menu li:has(.submenu) small::after {
 		content: "\25BC";        /* down triangle on larger screens */
