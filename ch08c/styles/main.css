@@ -1,0 +1,217 @@
+/* variables */
+:root {
+	--primary-color: #931420;
+	--accent-color: #f6bb73;
+	--light-accent: #fffded;
+	--light: white;
+	--dark: black;
+}
+
+/* reset */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* the default styles for the elements */
+body {
+	font-family: Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    width: 80%;
+    margin: auto;
+    border: 3px solid var(--primary-color);
+}
+header, section, aside, footer { padding: 1em; }
+h1, h2, h3, p, article, blockquote { padding-bottom: .5em; }
+ul { margin-left: 1em; }
+h1 { font-size: 150%; }
+h2 { font-size: 120%; }
+h3 { font-size: 110%; }
+a:focus, a:hover { font-style: italic; }
+
+/* the styles for the header */
+header {
+	border-bottom: 3px solid var(--primary-color);
+	background-image: linear-gradient(30deg, 
+		var(--accent-color) 0%, 
+		var(--light-accent) 25%, 
+		var(--light) 50%, 
+		var(--light-accent) 75%, 
+		var(--accent-color) 100%);
+	& h2 {
+		font-size: 175%;
+		color: var(--primary-color);
+		padding-bottom: 0;
+	}
+	& h3 {
+		font-size: 130%;
+		font-style: italic;
+	}
+	& img {
+		float: left;
+		margin: 0 30px;
+		width: clamp(40px, 15%, 66px);
+	}
+}
+
+/* the styles for the main element */
+main {
+	clear: left;
+	display: flex;
+}
+
+/* the styles for the section */
+section {
+	flex-basis: 75%;
+	& h1 {
+		color: var(--primary-color);
+	}
+	& article + h2 {
+		clear: left;
+		color: var(--primary-color);
+		border-top: 3px solid var(--primary-color);
+		padding-top: .5em;
+	}
+}
+
+/* the styles for the article */
+article {
+	padding-top: .5em;
+	margin-bottom: .5em;
+	& img {
+		float: left;
+		margin: .25em 1em 1em 0;
+		border: 1px solid var(--dark);
+		width: min(100%, 225px);
+	}
+}
+
+/* the styles for the aside */
+aside {
+	flex-basis: 25%;
+	& h2 {
+		color: var(--primary-color);
+	}
+	& img {
+		margin-bottom: .9em;
+	}
+	& blockquote {
+		font-style: italic;
+		margin-left: .5em;
+	}
+}
+
+/* the styles for the footer */
+footer {
+	background-color: var(--primary-color);
+	& p {
+		text-align: center;
+		color: white;
+		padding-bottom: 0; 
+	}
+}
+
+/* the styles for the navigation menu (small containers first) */
+.navbar {
+	container-type: inline-size;   /* each navbar is a container */
+	position: relative;            /* anchor for the drop-down menu */
+	background-color: var(--primary-color);
+	& ul {
+		list-style-type: none;
+		margin: 0;
+	}
+	& a {
+		display: block;
+		padding: .75em;
+		text-decoration: none;
+		color: var(--light);
+	}
+	& a.current {
+		color: var(--accent-color);
+		font-weight: bold;
+	}
+	& a.current:hover { 
+		font-style: normal; /* override hover effect */
+	}
+}
+/* keep the top menu's drop-down above the speakers menu */
+body > .navbar {
+	z-index: 20;
+}
+section .navbar {
+	z-index: 10;
+}
+
+/* hide both checkboxes; each label is a menu button */
+input[type="checkbox"] {
+	display: none;
+}
+.menu-btn {
+	display: block;
+	padding: .1em .6em;
+	font-size: 175%;
+	color: var(--light);
+	cursor: pointer;
+	&::before {
+		content: "\2630";          /* hamburger symbol */
+	}
+}
+input[type="checkbox"]:checked + .menu-btn::before {
+	content: "\2715";              /* close symbol */
+}
+
+/* the menu is hidden until its button is clicked */
+.menu {
+	display: none;
+	position: absolute;            /* drop-down sits on top of the page */
+	top: 100%;
+	left: 0;
+	min-width: 12em;
+	background-color: var(--primary-color);
+}
+input[type="checkbox"]:checked ~ .menu {
+	display: block;
+}
+
+/* items with a submenu get a right triangle;
+   the submenu displays to the right on hover */
+.menu li:has(.submenu) {
+	position: relative;
+	& > a::after {
+		content: " \25B6";
+	}
+	&:hover > .submenu {
+		display: block;
+	}
+}
+.submenu {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 100%;
+	min-width: 12em;
+	background-color: var(--primary-color);
+}
+
+/* the container query for wider navbars */
+@container (min-width: 560px) {
+	.menu-btn {
+		display: none;             /* hide the menu button */
+	}
+	.menu,
+	input[type="checkbox"]:checked ~ .menu {   /* horizontal even if checked */
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+		position: static;
+		min-width: 0;
+	}
+	.menu li:has(.submenu) > a::after {
+		content: " \25BC";         /* down triangle */
+	}
+	.submenu {
+		top: 100%;                 /* submenu displays below */
+		left: 0;
+	}
+}
